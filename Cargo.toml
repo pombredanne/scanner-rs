@@ -1,0 +1,22 @@
+[package]
+name = "scanner"
+version = "0.1.0"
+authors = ["CasualX <CasualX@github.com>"]
+
+description = "Binary signature scanner."
+
+documentation = "https://crates.fyi/crates/scanner"
+homepage = "https://github.com/CasualX/scanner-rs"
+repository = "https://github.com/CasualX/scanner-rs"
+
+readme = "readme.md"
+
+keywords = ["sig", "sigscan", "find", "pattern"]
+
+license = "MIT"
+
+[features]
+default = ["pelite"]
+
+[dependencies]
+pelite = { version = "0.2", optional = true }
