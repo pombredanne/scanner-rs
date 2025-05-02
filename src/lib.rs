@@ -399,23 +399,23 @@ impl<'a, 'p, 's> Iterator for ScanIter<'a, 'p, 's> {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct Match<'a> {
 	/// Haystack the match was found in.
-	pub haystack: &'a [u8],
+	pub(crate) haystack: &'a [u8],
 	/// Offset in the haystack the match was found.
-	pub at: u32,
+	pub(crate) at: u32,
 	/// Stored offsets as specified in the pattern.
-	pub store: [u32; MAX_STORE],
+	pub(crate) store: [u32; MAX_STORE],
 }
 
 impl<'a> Match<'a> {
 	/// Get the pointer to the location that was matched.
 	#[inline]
-	pub fn ptr(&self) -> *const u8 {
-		unsafe { self.haystack.as_ptr().offset(self.at as isize) }
+	unsafe pub fn ptr(&self) -> *const u8 {
+		self.haystack.as_ptr().offset(self.at as isize) 
 	}
 	/// Get a pointer from the store array.
 	#[inline]
-	pub fn get<T>(&self, idx: usize) -> *const T {
-		unsafe { self.haystack.as_ptr().offset(self.store[idx] as isize) as *const T }
+	unsafe pub fn get<T>(&self, idx: usize) -> *const T {
+		self.haystack.as_ptr().offset(self.store[idx] as isize) as *const T 
 	}
 }
 
